@@ -1,0 +1,54 @@
+package com.ims.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ims.dtos.ProductWithCategorySupplierDTO;
+import com.ims.repos.CategoryRepository;
+import com.ims.repos.ProductRepository;
+import com.ims.repos.SupplierRepository;
+
+@Component
+public class ProductCategorySupplierServiceImpl implements ProductCategorySupplierService{
+	
+	@Autowired
+	public CategoryRepository categoryRepo;
+	
+	@Autowired
+	public SupplierRepository supplierRepo;
+	
+	@Autowired
+	public ProductRepository productRepo;
+
+	@Override
+	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplier() {
+		
+		System.out.println("Category Data:");
+		categoryRepo.findAll().forEach(catg -> System.out.println(catg.getName()));
+		
+		System.out.println("Supplier Data:");
+		supplierRepo.findAll().forEach(supp -> System.out.println(supp.getName()));
+				
+		System.out.println("Product Data:");
+		productRepo.findAll().forEach(prod -> System.out.println(prod.getName()));
+		
+		
+		return null;
+	}
+
+	@Override
+	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplierSortByPriceDesc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductWithCategorySupplierDTO> getTop10ProductWithQuantityCategorySupplier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}
