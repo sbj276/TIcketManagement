@@ -1,11 +1,18 @@
 package com.ims.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ims.comparators.SortByPrice;
 import com.ims.dtos.ProductWithCategorySupplierDTO;
+import com.ims.entities.Product;
 import com.ims.repos.CategoryRepository;
 import com.ims.repos.ProductRepository;
 import com.ims.repos.SupplierRepository;
@@ -24,30 +31,74 @@ public class ProductCategorySupplierServiceImpl implements ProductCategorySuppli
 
 	@Override
 	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplier() {
+		/****
+		 * 1. Do we have all required data 
+		 * 2. Create Object of ProductWithCategorySupplierDTO class and use setters to set all the required values
+		 * 3. Add that newly created object to List 
+		 */
+		List<ProductWithCategorySupplierDTO> list = getListPCS();		
+		return list;
 		
-		System.out.println("Category Data:");
-		categoryRepo.findAll().forEach(catg -> System.out.println(catg.getName()));
+//		return productRepo.findAll()
+//				.stream()
+//				.map(prd ->{
+//			ProductWithCategorySupplierDTO temp = getPCS(prd);
+//			return temp;
+//		}).collect(Collectors.toList());
 		
-		System.out.println("Supplier Data:");
-		supplierRepo.findAll().forEach(supp -> System.out.println(supp.getName()));
-				
-		System.out.println("Product Data:");
-		productRepo.findAll().forEach(prod -> System.out.println(prod.getName()));
-		
-		
-		return null;
+	}
+	
+	 
+	private ProductWithCategorySupplierDTO getPCS(Product prd) {
+		ProductWithCategorySupplierDTO temp = new ProductWithCategorySupplierDTO();
+		temp.setProductId(prd.getProductId());
+		temp.setDescription(prd.getDescription());
+		temp.setName(prd.getName());
+		temp.setPrice(prd.getPrice());
+		temp.setQuantity(prd.getQuantity());
+		temp.setDescription(prd.getDescription());
+		temp.setCategoryName(prd.getCategory().getName());
+		temp.setSupplierName(prd.getSupplier().getName());
+		return temp;
 	}
 
+	private List<ProductWithCategorySupplierDTO> getListPCS(){
+		List<Product> products = productRepo.findAll();
+		List<ProductWithCategorySupplierDTO> list = new ArrayList<>();		
+		for(int i=0;i<products.size();i++) {
+			Product prd = products.get(i);
+			list.add(getPCS(prd));
+		}
+		return list;
+	}
 	@Override
 	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplierSortByPriceDesc() {
-		// TODO Auto-generated method stub
-		return null;
+		/***
+		 * 1. get all the required data 
+		 * 2. create list of objects from it 
+		 * 3. sort it by proce desc order
+		 */
+		List<ProductWithCategorySupplierDTO> list = getListPCS();							
+//		list.sort((prd1, prd2) -> prd2.getPrice().compareTo(prd1.getPrice()));
+		Collections.sort(list, new SortByPrice());
+		return list;
 	}
 
 	@Override
 	public List<ProductWithCategorySupplierDTO> getTop10ProductWithQuantityCategorySupplier() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProductWithCategorySupplierDTO> list = getListPCS();
+		Collections.sort(list, new SortByQuantity());
+		List<ProductWithCategorySupplierDTO> top10 = new ArrayList<>();
+		for(int i=0;i<10;i++) {
+			top10.add(list.get(i));
+		}		
+		//				return productRepo.findAll()
+		//				.stream()
+		//				.map(prd ->{
+		//			ProductWithCategorySupplierDTO temp = getPCS(prd);
+		//			return temp;
+		//		}).sorted(Comparator.comparing(ProductWithCategorySupplierDTO::getQuantity).reversed()).limit(10).toList();		
+		return top10;
 	}
 
 	

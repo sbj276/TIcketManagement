@@ -1,0 +1,5 @@
+package com.ims.dtos;
+
+public class ProductCategorySupplierService {
+
+}

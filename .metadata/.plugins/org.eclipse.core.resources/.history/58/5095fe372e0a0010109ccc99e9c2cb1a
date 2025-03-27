@@ -1,0 +1,87 @@
+-- Creating the tables (if not already created)
+CREATE TABLE IF NOT EXISTS categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS suppliers (
+    supplier_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact_info VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    category_id INT,
+    supplier_id INT,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id),
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)
+);
+
+-- Delete records in reverse order (children first)
+DELETE FROM products;
+
+DELETE FROM suppliers;
+
+DELETE FROM categories;
+
+
+-- Creating the stored procedure to insert 100 records into all tables
+DELIMITER $$
+
+CREATE PROCEDURE insert_all_records()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+
+    -- Insert Categories (100 categories)
+    WHILE i <= 100 DO
+        SET @category_name = CONCAT('Category ', i);
+        
+        INSERT INTO categories (name)
+        VALUES (@category_name);
+        
+        SET i = i + 1;
+    END WHILE;
+
+    -- Reset the counter for suppliers
+    SET i = 1;
+
+    -- Insert Suppliers (100 suppliers)
+    WHILE i <= 100 DO
+        SET @supplier_name = CONCAT('Supplier ', i);
+        SET @supplier_contact = CONCAT('Contact Info of Supplier ', i);
+
+        INSERT INTO suppliers (name, contact_info)
+        VALUES (@supplier_name, @supplier_contact);
+        
+        SET i = i + 1;
+    END WHILE;
+
+    -- Reset the counter for products
+    SET i = 1;
+
+    -- Insert Products (100 products)
+    WHILE i <= 100 DO
+        SET @product_name = CONCAT('Product ', i);
+        SET @product_description = CONCAT('Description of Product ', i);
+        SET @product_quantity = FLOOR(RAND() * 500) + 1;  -- Random quantity between 1 and 500
+        SET @product_price = ROUND(RAND() * 100, 2);  -- Random price between 0 and 100
+        SET @category_id = FLOOR(RAND() * 100) + 1;  -- Random category_id between 1 and 100
+        SET @supplier_id = FLOOR(RAND() * 100) + 1;  -- Random supplier_id between 1 and 100
+
+        INSERT INTO products (name, description, quantity, price, category_id, supplier_id)
+        VALUES (@product_name, @product_description, @product_quantity, @product_price, @category_id, @supplier_id);
+        
+        SET i = i + 1;
+    END WHILE;
+
+END$$
+
+DELIMITER ;
+
+-- Optionally, you can execute the procedure immediately if you want to insert data as soon as the tables are set up
+CALL insert_all_records();

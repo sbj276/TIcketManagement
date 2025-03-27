@@ -1,0 +1,9 @@
+package com.ims.comparators;
+
+import java.util.Comparator;
+
+import com.ims.dtos.ProductWithCategorySupplierDTO;
+
+public class SortByPrice implements Comparator<ProductWithCategorySupplierDTO>{
+
+}

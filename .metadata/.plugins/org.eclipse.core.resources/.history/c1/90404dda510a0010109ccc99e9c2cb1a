@@ -1,0 +1,12 @@
+package com.ims.services;
+
+import java.util.List;
+
+import com.ims.dtos.ProductWithCategorySupplierDTO;
+
+public interface ProductCategorySupplierService {
+
+	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplier();
+	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplierSortByPrice();
+	public List<ProductWithCategorySupplierDTO> getTop10ProductWithCategorySupplier();
+}

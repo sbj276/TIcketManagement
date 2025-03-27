@@ -1,0 +1,5 @@
+package com.ims.comparators;
+
+public class SortByPrice {
+
+}

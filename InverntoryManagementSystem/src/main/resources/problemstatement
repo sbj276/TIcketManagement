@@ -2,3 +2,281 @@ Problem statement:
 1. Create a List of  ProductWithCategorySupplierDTO for all the rows.
 2. Sort the list by price descending order.
 3. Display Top 10 products with highest quantities.   
+
+ArrayList
+1. Create a List of ProductDTO objects from List of products which are getting from DB
+	1.1 Sort the List of ProductDTOs based on product Ids 	
+2. Create a List of CategoryDTO objects from List of categories which are getting from DB
+3. Create a List of SupplierDTO objects from List of suppliers which are getting from DB
+
+
+LinkedList
+1. Create List of ProductDTO from List of products which are getting from DB  
+   Condition : In the  resultant list, All the products having even product_ids should present at the start of the list and All the products having odd product_ids should present at the end of the list
+   ie. 100, 98,96 ..... 1 ,3 ,5 ....
+
+2. Remove duplicates from the List of the SupplierDTO 
+   As a input you already have the list of SupplierDTO, Our task is remove the duplicate supplier out of it.     
+   
+                 
+Set
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Use Case: You want to get a list of all distinct product names in your inventory.
+Implementation:
+Retrieve all product names from the products table.
+Store them in a HashSet<String>.
+The HashSet will automatically remove duplicates, leaving you with a set of unique product names.
+
+2. Identifying Categories with No Products:
+Use Case: You want to find categories that currently have no products associated with them.
+Implementation:
+Retrieve all category IDs from the categories table.
+Retrieve all category IDs from the products table.
+Store the category IDs from categories in a HashSet<Integer>.
+Remove all category IDs from the products table from the HashSet.
+The remaining category IDs in the HashSet represent categories with no products.
+
+3. Detecting Suppliers Providing Only One Category:
+Use Case: You need to find suppliers that exclusively provide products within a single category.
+Implementation:
+Retrieve all supplier_id and category_id pairs from the products table.
+Create a HashMap<Integer, HashSet<Integer>> where the key is the supplier_id and the value is a HashSet of category_ids.
+Iterate through the retrieved data and populate the HashMap.
+Iterate through the HashMap and identify suppliers whose HashSet has a size of 1.
+
+4. Finding Products in Multiple Categories (Error Detection):
+Use Case: You want to detect products that are incorrectly listed in multiple categories (assuming this is an error in your system).
+Implementation:
+Retrieve all product_id and category_id pairs from the products table.
+Create a HashMap<Integer, HashSet<Integer>> where the key is the product_id and the value is a HashSet of category_ids.
+Iterate through the retrieved data and populate the HashMap.
+Iterate through the HashMap and identify products whose HashSet has a size greater than 1.
+
+5. Finding Suppliers Who Don't Supply a Certain Category:
+Use Case: You need to find all suppliers that do not supply any products within a given category.
+Implementation:
+Retrieve all supplier Ids from the supplier table.
+Retrieve all supplier Ids that supply the given category.
+Store all supplier Ids from the supplier table into a HashSet.
+Remove all supplier Ids from the second result from the HashSet.
+The remaining supplier Ids in the HashSet do not supply the given category.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LinkedHashSet
+
+Use Cases with LinkedHashSet:
+
+Unique Product Names with Insertion Order:
+
+Use Case: You want to get a list of all distinct product names in your inventory, in the order they were first encountered.
+Implementation:
+Retrieve product names from the products table.
+Store them in a LinkedHashSet<String>.
+The LinkedHashSet will remove duplicates and maintain the original insertion order.
+Benefit: The output will reflect the sequence in which products were initially added to your system.
+Categories with No Products (Insertion Order Preserved):
+
+Use Case: You want to find categories that currently have no products, and you want to list them in the order they were originally inserted into the categories table.
+Implementation:
+Retrieve all category IDs from the categories table.
+Retrieve all category IDs from the products table.
+Store the category IDs from categories in a LinkedHashSet<Integer>.
+Remove all category IDs from the products table from the LinkedHashSet.
+Benefit: The result will reflect the category insertion order.
+Detecting Suppliers Providing Only One Category (Insertion Order of Categories):
+
+Use Case: You need to find suppliers that exclusively provide products within a single category, and you want to maintain the insertion order of category IDs for each supplier.
+Implementation:
+Retrieve all supplier_id and category_id pairs from the products table.
+Create a HashMap<Integer, LinkedHashSet<Integer>> where the key is the supplier_id and the value is a LinkedHashSet of category_ids.
+Iterate through the retrieved data and populate the HashMap.
+Iterate through the HashMap and identify suppliers whose LinkedHashSet has a size of 1.
+Benefit: For each supplier, the categories are stored in the order they were first associated with the supplier.
+Finding Products in Multiple Categories (Error Detection, Insertion Order of Categories):
+
+Use Case: You want to detect products that are incorrectly listed in multiple categories (assuming this is an error in your system), and you want to preserve the order in which the categories were associated with each product.
+Implementation:
+Retrieve all product_id and category_id pairs from the products table.
+Create a HashMap<Integer, LinkedHashSet<Integer>> where the key is the product_id and the value is a LinkedHashSet of category_ids.
+Iterate through the retrieved data and populate the HashMap.
+Iterate through the HashMap and identify products whose LinkedHashSet has a size greater than 1.
+Benefit: For each product, the incorrect categories are listed in the order they were encountered.
+Finding Suppliers Who Don't Supply a Certain Category (Insertion Order of suppliers):
+
+Use Case: You need to find all suppliers that do not supply any products within a given category, and want to maintain the insertion order of the suppliers.
+Implementation:
+Retrieve all supplier Ids from the supplier table.
+Retrieve all supplier Ids that supply the given category.
+Store all supplier Ids from the supplier table into a LinkedHashSet.
+Remove all supplier Ids from the second result from the LinkedHashSet.
+Benefit: The suppliers will be listed in the order they are in the supplier table.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+TreeSet
+
+Alright, let's explore two use cases for TreeSet in your inventory management system, focusing on its ability to maintain elements in a sorted order.
+
+Key Difference: Sorted Order
+
+TreeSet automatically sorts its elements based on their natural ordering (if they implement Comparable) or a custom Comparator you provide.
+
+Use Cases with TreeSet:
+
+1. Sorted List of Product Names:
+
+Use Case: You want to retrieve a list of all unique product names from your inventory, sorted alphabetically.
+Implementation:
+Retrieve all product names from the products table.
+Store them in a TreeSet<String>.
+The TreeSet will automatically sort the product names in ascending alphabetical order.
+
+2. Sorted List of Product Prices:
+
+Use Case: You want to retrieve a list of all unique product prices, sorted in ascending order.
+Implementation:
+Retrieve all product prices from the products table.
+Store them in a TreeSet<Double>.
+The TreeSet will automatically sort the product prices in ascending numerical order.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Map
+HashMap
+
+1. Category ID to Category Name Mapping:
+
+Use Case: You need to efficiently convert category IDs to their corresponding category names for display or reporting purposes.
+Implementation:
+Retrieve all category_id and name pairs from the categories table.
+Create a HashMap<Integer, String> where the key is the category_id and the value is the name.
+Use the HashMap to quickly look up category names given their IDs.
+
+2. Product Price Lookup by Product Name:
+
+Use Case: You want to efficiently retrieve the price of a product given its name.
+Implementation:
+Retrieve all name and price pairs from the products table.
+Create a HashMap<String, Double> where the key is the name and the value is the price.
+Use the HashMap to quickly look up the price of a product by its name.
+
+3. Supplier ID to Supplier Name Mapping:
+
+Use Case: To convert supplier IDs to supplier names.
+Implementation:
+Retrieve all supplier_id and name pairs from the suppliers table.
+Create a HashMap<Integer, String> where the key is the supplier_id and the value is the name.
+Use the HashMap to look up supplier names based on supplier IDs.
+
+4. Products Grouped by Category ID:
+
+Use Case: You want to quickly retrieve a list of product names associated with a specific category ID.
+Implementation:
+Retrieve all category_id and name pairs from the products table.
+Create a HashMap<Integer, List<String>> where the key is the category_id and the value is a list of product names in that category.
+
+5. Average Price per Category:
+
+Use Case: To get the average price of the products within each category.
+Implementation:
+Retrieve all category_id and price pairs from the products table.
+Create a HashMap<Integer, List<Double>> where the key is the categoryId, and the value is a list of the prices.
+Loop through the hashmap, to calculate the average price of each category.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LinkedHashMap
+
+1. Implementing a "Recently Viewed Products" Feature:
+
+Use Case: You want to maintain a list of the most recently viewed products by a user, with a fixed capacity. When a new product is viewed, it should be added to the front of the list, and if the list exceeds the capacity, the least recently viewed product (the oldest entry) should be removed.
+Implementation:
+Create a LinkedHashMap<Integer, String> (product ID to product name) with a fixed capacity.
+Override the removeEldestEntry() method of LinkedHashMap to automatically remove the oldest entry when the capacity is exceeded.
+When a product is viewed:
+If the product ID is already in the LinkedHashMap, remove it and re-add it to the end (to update its "recently viewed" status).
+Add the product ID and name to the LinkedHashMap.
+
+Alright, let's dive into two more complex use cases for LinkedHashMap within your inventory management system, focusing on scenarios where insertion order is crucial and the logic is more intricate.
+
+1. Implementing a "Recently Viewed Products" Feature:
+
+Use Case: You want to maintain a list of the most recently viewed products by a user, with a fixed capacity. When a new product is viewed, it should be added to the front of the list, and if the list exceeds the capacity, the least recently viewed product (the oldest entry) should be removed.
+Implementation:
+Create a LinkedHashMap<Integer, String> (product ID to product name) with a fixed capacity.
+Override the removeEldestEntry() method of LinkedHashMap to automatically remove the oldest entry when the capacity is exceeded.
+When a product is viewed:
+If the product ID is already in the LinkedHashMap, remove it and re-add it to the end (to update its "recently viewed" status).
+Add the product ID and name to the LinkedHashMap.
+
+2. Supplier Inventory Tracking with Insertion Order and Quantity:
+
+Use Case: You want to track the inventory of products supplied by each supplier, maintaining the order in which products were added to the supplier's inventory and their respective quantities. You need to know the first item a supplier provided, and the last.
+Implementation:
+Create a HashMap<Integer, LinkedHashMap<Integer, Integer>> where the outer key is the supplier_id, the inner key is the product_id, and the inner value is the quantity of that product supplied.
+When a supplier adds a product to their inventory:
+If the supplier ID is not in the outer HashMap, create a new LinkedHashMap for that supplier.
+Add the product ID and quantity to the supplier's LinkedHashMap.
+This will maintain the order in which products were added for each supplier.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TreeMap
+
+Use Case: Sorted Product Listings by Price Range:
+
+Scenario: You want to efficiently retrieve a list of products, sorted by their price, within a specific price range. This could be used for displaying products to customers on an e-commerce platform or for generating price-based reports.
+
+Implementation:
+
+Retrieve all product names and their prices from the products table.
+Create a TreeMap<Double, List<String>>. The keys will be product prices (sorted automatically), and the values will be lists of product names with that price.
+Iterate through the retrieved data:
+If a price already exists as a key in the TreeMap, add the product name to the existing list.
+Otherwise, create a new list containing the product name and add it to the TreeMap with the price as the key.
+Implement a method to retrieve product names within a given price range by using TreeMap's subMap(fromKey, toKey) method.       
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CopyOnWriteArrayList
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Initialization:
+
+At application startup, load the product catalog from the database into a CopyOnWriteArrayList<ProductDTO>.
+Create a dedicated service (ProductCatalogService) to manage the product catalog.
+Read Operations (Concurrent Access):
+
+When a user requests the product catalog (e.g., browsing product listings, searching for products), the ProductCatalogService retrieves the data from the CopyOnWriteArrayList.
+Multiple threads can concurrently read from the CopyOnWriteArrayList without any locking or contention, ensuring high performance.
+Iterators over the CopyOnWriteArrayList are thread-safe and do not throw ConcurrentModificationException, even if updates occur concurrently.
+Update Operations (Infrequent Updates):
+
+When an administrative action or a scheduled batch job triggers a product update, the ProductCatalogService performs the following steps:
+Retrieves the updated product data from the database.
+Creates a new CopyOnWriteArrayList<ProductDTO> with the updated data.
+Atomically replaces the old CopyOnWriteArrayList with the new one.
+While the update is in progress, read operations continue to use the old CopyOnWriteArrayList, ensuring uninterrupted service.
+Once the update is complete, subsequent read operations will use the new CopyOnWriteArrayList.
+Simulating High Concurrency (Testing):
+
+Use a tool like JMeter or Gatling to simulate thousands of concurrent user requests to the product catalog.
+Monitor the application's performance (latency, throughput, CPU usage) to ensure it can handle the load.
+Simultaneously trigger product updates to verify that read operations remain unaffected.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ConcurrentHashMap
+
+Use Cases:
+
+1. Real-Time Product Inventory Tracking:
+
+Scenario: Your inventory management system needs to track product quantities in real-time, handling concurrent updates from various sources (e.g., sales, restocking, stock adjustments).   
+Implementation:
+Create a ConcurrentHashMap<Integer, Integer> where the key is the product_id and the value is the current quantity.
+When a sale occurs, decrement the quantity for the corresponding product using computeIfPresent().
+When restocking occurs, increment the quantity for the corresponding product using compute().
+When stock adjustments are made, update the quantity directly using put().
+Read operations (e.g., displaying current stock levels) can be performed concurrently without blocking.
+
+// Handle a sale (decrement quantity)
+// Handle restocking (increment quantity)
+// Handle stock adjustment (set quantity)
+// Get current quantity for a product
+        
+    

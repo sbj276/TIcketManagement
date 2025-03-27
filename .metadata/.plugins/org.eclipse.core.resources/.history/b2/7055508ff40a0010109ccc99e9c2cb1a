@@ -1,0 +1,9 @@
+Problem statement: 
+1. Create a List of  ProductWithCategorySupplierDTO for all the rows.
+2. Sort the list by price descending order.
+3. Display Top 10 products with highest quantities.   
+
+ArrayList
+1. Create a List of ProductDTO objects from List of products which are getting from DB
+2. Create a List of CategoryDTO objects from List of categories which are getting from DB
+#. Create a List of SupplierDTO objects from List of suppliers which are getting from DB

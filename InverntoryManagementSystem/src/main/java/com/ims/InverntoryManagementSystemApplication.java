@@ -19,7 +19,13 @@ public class InverntoryManagementSystemApplication  implements CommandLineRunner
 
 	@Override
 	public void run(String... args) throws Exception {
-		productCatSupp.getProductWithCategorySupplier();
+		System.out.println("*********************** getProductWithCategorySupplier() ***********************");
+		productCatSupp.getProductWithCategorySupplier().forEach(System.out::println);
+		System.out.println("*********************** getProductWithCategorySupplierSortByPriceDesc() ***********************");
+		productCatSupp.getProductWithCategorySupplierSortByPriceDesc().forEach(System.out::println);
+		System.out.println("*********************** getTop10ProductWithQuantityCategorySupplier() ***********************");
+		productCatSupp.getTop10ProductWithQuantityCategorySupplier().forEach(System.out::println);
+		
 		
 	}
 	

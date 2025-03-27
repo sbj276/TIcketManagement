@@ -69,4 +69,12 @@ public class ProductWithCategorySupplierDTO {
     public void setSupplierName(String supplierName) {
         this.supplierName = supplierName;
     }
+
+	@Override
+	public String toString() {
+		return "ProductWithCategorySupplierDTO [productId=" + productId + ", name=" + name + ", description="
+				+ description + ", quantity=" + quantity + ", price=" + price + ", categoryName=" + categoryName
+				+ ", supplierName=" + supplierName + "]";
+	}
+    
 }

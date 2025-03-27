@@ -1,0 +1,33 @@
+Problem statement: 
+1. Create a List of  ProductWithCategorySupplierDTO for all the rows.
+2. Sort the list by price descending order.
+3. Display Top 10 products with highest quantities.   
+
+ArrayList
+1. Create a List of ProductDTO objects from List of products which are getting from DB
+	1.1 Sort the List of ProductDTOs based on product Ids 	
+2. Create a List of CategoryDTO objects from List of categories which are getting from DB
+3. Create a List of SupplierDTO objects from List of suppliers which are getting from DB
+
+
+LinkedList
+1. Create List of ProductDTO from List of products which are getting from DB  
+   Condition : In the  resultant list, All the products having even product_ids should present at the start of the list and All the products having odd product_ids should present at the end of the list
+   ie. 100, 98,96 ..... 1 ,3 ,5 ....
+
+2. Remove duplicates from the List of the SupplierDTO 
+   As a input you already have the list of SupplierDTO, Our task is remove the duplicate supplier out of it.     
+   
+       
+       
+
+Set
+HashSet
+------
+LinkedHashSet
+TreeSet
+
+Map
+HashMap
+LinkedHashMap
+TreeMap       

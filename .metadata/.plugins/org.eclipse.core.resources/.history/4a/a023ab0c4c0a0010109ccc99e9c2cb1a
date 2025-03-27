@@ -1,0 +1,31 @@
+package com.ims.services;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.ims.dtos.ProductWithCategorySupplierDTO;
+
+@Component
+public class ProductCategorySupplierServiceImpl implements ProductCategorySupplierService{
+
+	@Override
+	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductWithCategorySupplierDTO> getProductWithCategorySupplierSortByPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductWithCategorySupplierDTO> getTop10ProductWithCategorySupplier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

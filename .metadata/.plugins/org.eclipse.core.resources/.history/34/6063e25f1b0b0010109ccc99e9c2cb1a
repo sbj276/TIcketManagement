@@ -1,0 +1,29 @@
+package com.ims;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.ims.services.ProductCategorySupplierService;
+
+@SpringBootApplication
+public class InverntoryManagementSystemApplication  implements CommandLineRunner{
+	
+	@Autowired
+	public ProductCategorySupplierService productCatSupp;
+	
+	public static void main(String[] args) {
+		SpringApplication.run(InverntoryManagementSystemApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+		productCatSupp.getProductWithCategorySupplier().forEach(System.out::println);
+		
+		
+	}
+	
+	
+}
